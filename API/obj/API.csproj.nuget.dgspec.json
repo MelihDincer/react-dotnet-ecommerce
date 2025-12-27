@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\m_din\\source\\repos\\React_Projects\\e-commerce\\react-dotnet-ecommerce\\API\\API.csproj": {}
+    "/Users/dincer/Desktop/React-Projects/react-dotnet-ecommerce/API/API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\m_din\\source\\repos\\React_Projects\\e-commerce\\react-dotnet-ecommerce\\API\\API.csproj": {
+    "/Users/dincer/Desktop/React-Projects/react-dotnet-ecommerce/API/API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\m_din\\source\\repos\\React_Projects\\e-commerce\\react-dotnet-ecommerce\\API\\API.csproj",
+        "projectUniqueName": "/Users/dincer/Desktop/React-Projects/react-dotnet-ecommerce/API/API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\m_din\\source\\repos\\React_Projects\\e-commerce\\react-dotnet-ecommerce\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\m_din\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\m_din\\source\\repos\\React_Projects\\e-commerce\\react-dotnet-ecommerce\\API\\obj\\",
+        "projectPath": "/Users/dincer/Desktop/React-Projects/react-dotnet-ecommerce/API/API.csproj",
+        "packagesPath": "/Users/dincer/.nuget/packages/",
+        "outputPath": "/Users/dincer/Desktop/React-Projects/react-dotnet-ecommerce/API/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\m_din\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/dincer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -53,6 +47,20 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -74,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
