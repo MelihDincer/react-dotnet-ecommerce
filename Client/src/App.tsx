@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
 
 const products = [
   { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
@@ -24,12 +25,30 @@ function Header() {
 }
 
 function ProductList() {
+  const [products, setProducts] = useState([
+    { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
+    { id: 2, productName: "Ürün 2", stock: 20, isActive: false },
+    { id: 3, productName: "Ürün 3", stock: 30, isActive: true },
+    { id: 4, productName: "Ürün 4", stock: 40, isActive: false },
+    { id: 5, productName: "Ürün 5", stock: 50, isActive: true },
+  ]);
+  function addProduct() {
+    setProducts([
+      ...products,
+      { id: 99, productName: "Ürün 99", stock: 90, isActive: true },
+    ]);
+  }
   return (
-    <div className="row">
-      {products.map((p) => (
-        <Product key={p.id} product={p} />
-      ))}
-    </div>
+    <>
+      <button className="btn btn-primary" onClick={addProduct}>
+        Ürün Ekle
+      </button>
+      <div className="row">
+        {products.map((p) => (
+          <Product key={p.id} product={p} />
+        ))}
+      </div>
+    </>
   );
 }
 
