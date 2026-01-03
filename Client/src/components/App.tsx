@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { IProduct } from "../model/IProduct";
 import Header from "./Header";
 import ProductList from "./ProductList";
-import ButtonUsage from "./ButtonUsage";
+import { Container, CssBaseline } from "@mui/material";
 
-const products = [
-  { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
-  { id: 2, productName: "Ürün 2", stock: 20, isActive: false },
-  { id: 3, productName: "Ürün 3", stock: 30, isActive: true },
-  { id: 4, productName: "Ürün 4", stock: 40, isActive: false },
-  { id: 5, productName: "Ürün 5", stock: 50, isActive: true },
-];
+// const products = [
+//   { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
+//   { id: 2, productName: "Ürün 2", stock: 20, isActive: false },
+//   { id: 3, productName: "Ürün 3", stock: 30, isActive: true },
+//   { id: 4, productName: "Ürün 4", stock: 40, isActive: false },
+//   { id: 5, productName: "Ürün 5", stock: 50, isActive: true },
+// ];
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -37,10 +37,11 @@ function App() {
   }
   return (
     <>
-      <div className="container">
-        <Header products={products} />
+      <CssBaseline />
+      <Header />
+      <Container>
         <ProductList products={products} addProduct={addProduct} />
-      </div>
+      </Container>
     </>
   );
 }
