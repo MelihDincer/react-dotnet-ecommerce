@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IProduct } from "../model/IProduct";
 import Header from "./Header";
 import ProductList from "./ProductList";
+import ButtonUsage from "./ButtonUsage";
 
 const products = [
   { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
