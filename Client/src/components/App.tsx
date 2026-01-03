@@ -2,8 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { IProduct } from "../model/IProduct";
 import Header from "./Header";
-import ProductList from "./ProductList";
 import { Container, CssBaseline } from "@mui/material";
+import { Outlet } from "react-router";
 
 // const products = [
 //   { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
@@ -21,26 +21,14 @@ function App() {
       .then((response) => response.json())
       .then((data) => setProducts(data));
   }, []);
-  function addProduct() {
-    setProducts([
-      ...products,
-      {
-        id: 99,
-        name: "Ürün 99",
-        description: "Deneme",
-        price: 9999,
-        stock: 90,
-        isActive: true,
-        imageUrl: "99.JPG",
-      },
-    ]);
-  }
+
   return (
     <>
       <CssBaseline />
       <Header />
       <Container>
-        <ProductList products={products} addProduct={addProduct} />
+        <Outlet />
+        {/* <ProductList products={products} addProduct={addProduct} /> */}
       </Container>
     </>
   );
