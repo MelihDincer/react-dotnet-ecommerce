@@ -4,9 +4,8 @@ import {
   Badge,
   Box,
   Button,
+  Container,
   IconButton,
-  List,
-  ListItem,
   Stack,
   Toolbar,
   Typography,
@@ -33,26 +32,33 @@ const navStyles = {
 export default function Header() {
   return (
     <AppBar position="static" sx={{ mb: 4 }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6">E-Commerce</Typography>
-          <Stack direction="row">
-            {links.map((link) => (
-              <Button component={NavLink} to={link.to} style={navStyles}>
-                {link.title}
-              </Button>
-            ))}
-          </Stack>
-        </Box>
+      <Container>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography variant="h6">E-Commerce</Typography>
+            <Stack direction="row">
+              {links.map((link) => (
+                <Button
+                  key={link.to}
+                  component={NavLink}
+                  to={link.to}
+                  sx={navStyles}
+                >
+                  {link.title}
+                </Button>
+              ))}
+            </Stack>
+          </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton size="large" edge="start" color="inherit">
-            <Badge badgeContent="2" color="secondary">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
-        </Box>
-      </Toolbar>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton size="large" edge="start" color="inherit">
+              <Badge badgeContent="2" color="secondary">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }
