@@ -20,7 +20,7 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     requests.Catalog.details(Number(id))
-      .then((response) => response.json())
+
       .then((data) => setProduct(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
@@ -55,8 +55,6 @@ export default function ProductDetails() {
         </Typography>
       </Box>
     );
-  if (!product) return <h5>Product not found...</h5>;
-
   return (
     <Grid container spacing={2}>
       <Grid size={{ xl: 3, lg: 4, md: 5, sm: 6, xs: 12 }}>

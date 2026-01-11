@@ -9,7 +9,6 @@ public class ExceptionHandling
     private readonly ILogger<ExceptionHandling> _logger;
     private readonly IHostEnvironment _env;
 
-
     public ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger, IHostEnvironment env)
     {
         _next = next;
