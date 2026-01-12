@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header";
 import { Container, CssBaseline } from "@mui/material";
 import { Outlet } from "react-router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const products = [
 //   { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
@@ -14,6 +16,7 @@ import { Outlet } from "react-router";
 function App() {
   return (
     <>
+      <ToastContainer position="top-right" hideProgressBar theme="colored" />
       <CssBaseline />
       <Header />
       <Container>
