@@ -1,4 +1,5 @@
 using API.Data;
+using API.DTO;
 using API.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,10 @@ public class CartController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult<Cart>> GetCart()
+    public async Task<ActionResult<CartDTO>> GetCart()
     {
         var cart = await GetOrCreateCart();
-        return cart;
+        return CartToDTO(cart);
     }
 
     [HttpPost]
@@ -36,9 +37,19 @@ public class CartController : ControllerBase
         var result = await _context.SaveChangesAsync() > 0;
         if(result)
         {
-            return CreatedAtAction(nameof(GetCart),cart);
+            return CreatedAtAction(nameof(GetCart),CartToDTO(cart));
         }
         return BadRequest(new ProblemDetails{Title="The product can not be added to cart"});
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult> DeleteItemFromCart(int productId, int quantity)
+    {
+        var cart = await GetOrCreateCart();
+        cart.DeleteItem(productId,quantity);
+        var result = await _context.SaveChangesAsync() > 0;
+        if(result) return Ok();
+        return BadRequest(new ProblemDetails{Title="Problem removing item from the cart."});
     }
 
     private async Task<Cart> GetOrCreateCart()
@@ -59,5 +70,22 @@ public class CartController : ControllerBase
             await _context.SaveChangesAsync();
         }
         return cart;
+    }
+
+    private CartDTO CartToDTO(Cart cart)
+    {
+        return new CartDTO
+        {
+            CartId= cart.CartId,
+            CustomerId = cart.CustomerId,
+            CartItems = cart.CartItems.Select(item => new CartItemDTO
+            {
+             ProductId=item.ProductId,
+             Name = item.Product.Name,
+             Price = item.Product.Price,
+              Quantity = item.Quantity,
+              ImageUrl = item.Product.ImageUrl
+            }).ToList()
+        };
     }
 }
