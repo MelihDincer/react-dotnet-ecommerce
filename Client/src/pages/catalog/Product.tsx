@@ -10,12 +10,25 @@ import { IProduct } from "../../model/IProduct";
 import SearchIcon from "@mui/icons-material/Search";
 import { AddShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router";
+import { useState } from "react";
+import requests from "../../api/requests";
+import Stack from "@mui/material/Stack";
 
 export interface Props {
   product: IProduct;
 }
 
 export default function Product({ product }: Props) {
+  const [loading, setLoading] = useState(false);
+
+  function handleAddItem(productId: number) {
+    setLoading(true);
+    requests.Cart.addItem(productId)
+      .then((cart) => console.log(cart))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }
+
   return (
     <Card>
       <CardMedia
@@ -41,6 +54,9 @@ export default function Product({ product }: Props) {
           variant="outlined"
           startIcon={<AddShoppingCart />}
           color="success"
+          loading={loading}
+          loadingPosition="start"
+          onClick={() => handleAddItem(product.id)}
         >
           Add To Cart
         </Button>
