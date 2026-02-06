@@ -12,8 +12,6 @@ import { AddShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router";
 import { useState } from "react";
 import requests from "../../api/requests";
-import Stack from "@mui/material/Stack";
-
 export interface Props {
   product: IProduct;
 }
