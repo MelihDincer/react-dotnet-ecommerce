@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, NavLink } from "react-router";
+import { useCartContext } from "../context/CartContext";
 
 const links = [
   { title: "Home", to: "/" },
@@ -31,6 +32,11 @@ const navStyles = {
   },
 };
 export default function Header() {
+  const { cart } = useCartContext();
+  const count = cart?.cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
   return (
     <AppBar position="static" sx={{ mb: 4 }}>
       <Container>
@@ -59,7 +65,7 @@ export default function Header() {
               edge="start"
               color="inherit"
             >
-              <Badge badgeContent="2" color="secondary">
+              <Badge badgeContent={count} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>

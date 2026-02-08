@@ -1,19 +1,35 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header";
-import { Container, CssBaseline } from "@mui/material";
+import { Box, CircularProgress, Container, CssBaseline } from "@mui/material";
 import { Outlet } from "react-router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// const products = [
-//   { id: 1, productName: "Ürün 1", stock: 10, isActive: true },
-//   { id: 2, productName: "Ürün 2", stock: 20, isActive: false },
-//   { id: 3, productName: "Ürün 3", stock: 30, isActive: true },
-//   { id: 4, productName: "Ürün 4", stock: 40, isActive: false },
-//   { id: 5, productName: "Ürün 5", stock: 50, isActive: true },
-// ];
+import { useEffect, useState } from "react";
+import requests from "../api/requests";
+import { useCartContext } from "../context/CartContext";
 
 function App() {
+  const { setCart } = useCartContext();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    requests.Cart.get()
+      .then((cart) => setCart(cart))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="50vh"
+      >
+        <CircularProgress size={40} />
+      </Box>
+    );
   return (
     <>
       <ToastContainer position="top-right" hideProgressBar theme="colored" />
