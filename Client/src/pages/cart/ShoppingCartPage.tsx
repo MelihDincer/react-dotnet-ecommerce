@@ -13,6 +13,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import requests from "../../api/requests";
+import { toast } from "react-toastify";
 
 export default function ShoppingCartPage() {
   const { cart, setCart, deleteItem } = useCartContext();
@@ -143,13 +144,14 @@ export default function ShoppingCartPage() {
                   loading={
                     status.loading && status.id === "del_all" + item.productId
                   }
-                  onClick={() =>
+                  onClick={() => {
                     handleDeleteItem(
                       item.productId,
                       "del_all" + item.productId,
                       item.quantity,
-                    )
-                  }
+                    );
+                    toast.error("Ürün sepetinizden silindi.");
+                  }}
                   color="error"
                 >
                   <Delete />

@@ -7,24 +7,44 @@ import {
   Table,
   TableRow,
   TableCell,
+  Stack,
 } from "@mui/material";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { IProduct } from "../../model/IProduct";
 import requests from "../../api/requests";
+import { LoadingButton } from "@mui/lab";
+import { AddShoppingCart } from "@mui/icons-material";
+import { useCartContext } from "../../context/CartContext";
+import { toast } from "react-toastify";
 
 export default function ProductDetails() {
+  const { cart, setCart } = useCartContext();
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAdded, setIsAdded] = useState(false);
+
+  const item = cart?.cartItems.find((i) => i.productId == product?.id);
+
   useEffect(() => {
     requests.Catalog.details(Number(id))
-
       .then((data) => setProduct(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }, [id]); //sadece id değiştiğinde fetch request yapılacak.
+
+  function handleAddItem(id: number) {
+    setIsAdded(true);
+    requests.Cart.addItem(id)
+      .then((cart) => {
+        setCart(cart);
+        toast.success("Sepetinize eklendi.");
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setIsAdded(false));
+  }
 
   if (loading)
     return (
@@ -82,6 +102,22 @@ export default function ProductDetails() {
             </TableRow>
           </Table>
         </TableContainer>
+        <Stack direction="row" spacing={2} sx={{ mt: 3 }} alignItems="center">
+          <LoadingButton
+            variant="outlined"
+            loadingPosition="start"
+            startIcon={<AddShoppingCart />}
+            loading={isAdded}
+            onClick={() => handleAddItem(product.id)}
+          >
+            Sepete Ekle
+          </LoadingButton>
+          {item?.quantity! > 0 && (
+            <Typography variant="body2">
+              Sepetinize {item?.quantity} adet eklendi.
+            </Typography>
+          )}
+        </Stack>
       </Grid>
     </Grid>
   );
