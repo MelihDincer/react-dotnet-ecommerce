@@ -16,9 +16,10 @@ import requests from "../../api/requests";
 import { toast } from "react-toastify";
 import CartSummary from "./CartSummary";
 import { currencyTRY } from "../../utils/formatCurrency";
+import { Link } from "react-router";
 
 export default function ShoppingCartPage() {
-  const { cart, setCart, deleteItem } = useCartContext();
+  const { cart, setCart } = useCartContext();
   const [status, setStatus] = useState({ loading: false, id: "" });
 
   function handleAddItem(productId: number, id: string) {
@@ -73,7 +74,7 @@ export default function ShoppingCartPage() {
                     "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
-                  <TableCell>
+                  <TableCell component={Link} to={`/catalog/${item.productId}`}>
                     <img
                       src={`http://localhost:5047/images/${item.imageUrl}`}
                       style={{
