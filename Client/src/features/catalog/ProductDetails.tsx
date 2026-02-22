@@ -17,12 +17,18 @@ import { IProduct } from "../../model/IProduct";
 import requests from "../../api/requests";
 import { LoadingButton } from "@mui/lab";
 import { AddShoppingCart } from "@mui/icons-material";
-import { useCartContext } from "../../context/CartContext";
+// import { useCartContext } from "../../context/CartContext";
 import { toast } from "react-toastify";
 import { currencyTRY } from "../../utils/formatCurrency";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setCart } from "../cart/cartSlice";
 
 export default function ProductDetails() {
-  const { cart, setCart } = useCartContext();
+  // const { cart, setCart } = useCartContext();
+
+  const { cart } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +47,7 @@ export default function ProductDetails() {
     setIsAdded(true);
     requests.Cart.addItem(id)
       .then((cart) => {
-        setCart(cart);
+        dispatch(setCart(cart));
         toast.success("Sepetinize eklendi.");
       })
       .catch((error) => console.log(error))

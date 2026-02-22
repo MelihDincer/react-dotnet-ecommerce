@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Alert, Box } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-import { useCartContext } from "../../context/CartContext";
+// import { useCartContext } from "../../context/CartContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
@@ -17,22 +17,27 @@ import { toast } from "react-toastify";
 import CartSummary from "./CartSummary";
 import { currencyTRY } from "../../utils/formatCurrency";
 import { Link } from "react-router";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { setCart } from "./cartSlice";
 
 export default function ShoppingCartPage() {
-  const { cart, setCart } = useCartContext();
+  // const { cart, setCart } = useCartContext();
+  const { cart } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
   const [status, setStatus] = useState({ loading: false, id: "" });
 
   function handleAddItem(productId: number, id: string) {
     setStatus({ loading: true, id: id });
     requests.Cart.addItem(productId)
-      .then((cart) => setCart(cart))
+      .then((cart) => dispatch(setCart(cart)))
       .catch((error) => console.log(error))
       .finally(() => setStatus({ loading: false, id: "" }));
   }
-  function handleDeleteItem(productId: number, id: string, quantity: 1) {
+  function handleDeleteItem(productId: number, id: string, quantity: number) {
     setStatus({ loading: true, id: id });
     requests.Cart.deleteItem(productId, quantity)
-      .then((cart) => setCart(cart))
+      .then((cart) => dispatch(setCart(cart)))
       .catch((error) => console.log(error))
       .finally(() => setStatus({ loading: false, id: "" }));
   }
@@ -113,6 +118,7 @@ export default function ShoppingCartPage() {
                           handleDeleteItem(
                             item.productId,
                             "del" + item.productId,
+                            1,
                           )
                         }
                         size="small"

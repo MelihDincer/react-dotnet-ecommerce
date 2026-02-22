@@ -1,9 +1,11 @@
 import { Box, Paper, Typography, Divider, Button } from "@mui/material";
-import { useCartContext } from "../../context/CartContext";
+// import { useCartContext } from "../../context/CartContext";
 import { currencyTRY } from "../../utils/formatCurrency";
+import { useAppSelector } from "../../hooks/hooks";
 
 export default function CartSummary() {
-  const { cart } = useCartContext();
+  // const { cart } = useCartContext();
+  const { cart } = useAppSelector((state) => state.cart);
 
   const subtotal =
     cart?.cartItems.reduce(

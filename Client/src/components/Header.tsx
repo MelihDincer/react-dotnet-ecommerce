@@ -11,7 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, NavLink } from "react-router";
-import { useCartContext } from "../context/CartContext";
+// import { useCartContext } from "../context/CartContext";
+import { useAppSelector } from "../hooks/hooks";
 
 const links = [
   { title: "Home", to: "/" },
@@ -32,7 +33,8 @@ const navStyles = {
   },
 };
 export default function Header() {
-  const { cart } = useCartContext();
+  // const { cart } = useCartContext();
+  const { cart } = useAppSelector((state) => state.cart);
   const count = cart?.cartItems.reduce(
     (total, item) => total + item.quantity,
     0,

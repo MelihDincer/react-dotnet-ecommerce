@@ -12,22 +12,25 @@ import { AddShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router";
 import { useState } from "react";
 import requests from "../../api/requests";
-import { useCartContext } from "../../context/CartContext";
+// import { useCartContext } from "../../context/CartContext";
 import { toast } from "react-toastify";
 import { currencyTRY } from "../../utils/formatCurrency";
+import { useAppDispatch } from "../../hooks/hooks";
+import { setCart } from "../cart/cartSlice";
 export interface Props {
   product: IProduct;
 }
 
 export default function Product({ product }: Props) {
   const [loading, setLoading] = useState(false);
-  const { setCart } = useCartContext();
+  // const { setCart } = useCartContext();
+  const dispatch = useAppDispatch();
 
   function handleAddItem(productId: number) {
     setLoading(true);
     requests.Cart.addItem(productId)
       .then((cart) => {
-        setCart(cart);
+        dispatch(setCart(cart));
         toast.success("Sepetinize eklendi.");
       })
       .catch((error) => console.log(error))
